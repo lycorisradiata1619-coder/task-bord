@@ -1,35 +1,66 @@
 # task-board
 
-HTML/CSS/JavaScript で構築されたタスク管理ボードアプリ。
+Vite + React で構築されたタスク管理ボードアプリ。
 
 ## 技術スタック
 
-- **HTML5** — マークアップ
-- **CSS3** — スタイリング
-- **JavaScript (ES6+)** — インタラクション・ロジック
+| カテゴリ | 技術 | バージョン |
+|---|---|---|
+| UI ライブラリ | React | ^18.3.1 |
+| ビルドツール | Vite | ^5.4.2 |
+| React プラグイン | @vitejs/plugin-react | ^4.3.1 |
+| スタイリング | CSS3（バニラ CSS） | — |
+| 言語 | JavaScript (ES6+) / JSX | — |
+| 永続化 | localStorage | — |
 
 ## プロジェクト構成
 
 ```
 task-board/
-├── index.html        # エントリーポイント
-├── css/
-│   └── style.css     # スタイルシート
-├── js/
-│   └── main.js       # メインスクリプト
+├── index.html                    # エントリーポイント
+├── vite.config.js                # Vite 設定（base パス含む）
+├── package.json
+├── src/
+│   ├── main.jsx                  # React ルートマウント
+│   ├── App.jsx                   # メインコンポーネント
+│   ├── App.css                   # コンポーネントスタイル
+│   └── index.css                 # グローバルリセット
+├── .github/
+│   └── workflows/
+│       └── deploy.yml            # GitHub Pages 自動デプロイ
 └── CLAUDE.md
 ```
 
+## コンポーネント命名規約
+
+- **コンポーネントファイル名** — パスカルケース (`App.jsx`, `TaskItem.jsx`)
+- **コンポーネント関数名** — パスカルケース (`export default function App()`)
+- **CSS クラス名** — BEM 記法を採用
+  - ブロック: `.board`, `.task-item`, `.input-row`
+  - エレメント: `.board__title`, `.task-item__text`, `.input-row__btn`
+  - モディファイア: `.task-item--done`
+- **その他のファイル名** — ケバブケース (`vite.config.js`)
+- **state / 変数名** — キャメルケース (`tasks`, `nextId`, `loadTasks`)
+
 ## 開発ガイドライン
 
-- モジュールは ES6 モジュール構文 (`import`/`export`) を使用する
-- CSS はセレクターの詳細度を低く保ち、クラスベースのスタイリングを優先する
-- JavaScript はバニラ JS を使用し、不要なライブラリの追加を避ける
-- ファイル名はケバブケース (`my-component.js`) で統一する
+- コンポーネントは `src/` 直下に配置し、肥大化したら `src/components/` へ分割する
+- state 管理は React `useState` / `useEffect` で行い、外部ライブラリは導入しない
+- CSS はセレクターの詳細度を低く保ち、BEM クラスベースのスタイリングを優先する
+- ファイル名はケバブケース、コンポーネント名はパスカルケースで統一する
 
 ## ブラウザ対応
 
 モダンブラウザ（Chrome・Firefox・Edge・Safari 最新版）を対象とする。
+
+## デプロイ先
+
+| 項目 | 内容 |
+|---|---|
+| GitHub リポジトリ | https://github.com/lycorisradiata1619-coder/task-bord.git |
+| 公開 URL | https://lycorisradiata1619-coder.github.io/task-bord/ |
+| デプロイ方法 | `main` ブランチへのプッシュで GitHub Actions が自動ビルド・デプロイ |
+| Vite base パス | `/task-bord/` |
 
 ## Git 運用ルール
 
